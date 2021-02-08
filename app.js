@@ -1,19 +1,29 @@
 const players = [
   {
-    name: "Guil",
-    score: 50
+    name: "Razianne",
+    score: 90,
+    id: 1
   },
   {
-    name: "Treasure",
-    score: 85
+    name: "Kezianne",
+    score: 85,
+    id : 2
   },
   {
-    name: "Ashley",
-    score: 95
+    name: "Sol",
+    score: 95,
+    id : 3
   },
   {
-    name: "James",
-    score: 80
+    name: "Amanda",
+    score: 80,
+    id : 4
+  },
+  
+  {
+    name: "Collins",
+    score: 80,
+    id : 5
   }
 ];
 
@@ -22,53 +32,64 @@ const Header = (props) => {
   return (
   <header>
     <h1>{props.title}</h1>
-    <span className="stats">{props.totalPlayers}</span>
+    <span className="stats">Players: {props.totalPlayers}</span>
   </header>
   );
 
 }
-
-
 const Player = (props) => {
   return (
     <div className="player">
       <span className="player-name">{props.name}</span>
 
-      <Counter score={props.score}/>
+      <Counter/>
     </div>
   );
 }
 
+class Counter extends React.Component {
 
-const Counter = (props) => {
-  return (
-    <div className="counter">
-      <button className="counter-action decrement"></button>
-      <span className="counter-score">{props.score}</span>
-      <button className="counter-action increment"> + </button>
-    </div>
-  );
+  state ={
+      score:0
+    };
+
+    incrementScore() {
+
+      this.setState({
+        score:this.state.score+1
+      });
+
+    }
+    
+  render() {
+    
+   
+    return (
+      <div className="counter">
+        <button className="counter-action decrement"> - </button>
+        <span className="counter-score">{this.state.score}</span>
+        <button className="counter-action increment" onClick={this.incrementScore.bind(this)}> + </button>
+      </div>
+    );
+    
+  }
 }
-
 const App = (props) => {
   return (
     <div className="scoreboard">
-      <Header title="Scoreboard" totalPlayers={1}/>
+      <Header title="Scoreboard" totalPlayers={props.initialPlayers.length}/>
 
       {/*players list */}
-
-     
-      <Player name="Razianne" score={30}/>
-      <Player name="Kezianne" score={20}/>  
-      <Player name="Sol" score={60}/>
-      <Player name="Amanda" score={40}/>
-      <Player name="Collins" score={40}/>
+      {props.initialPlayers.map( player => 
+      <Player
+        name ={player.name}
+       
+        key={player.id.toString()}   
+      />
+      )}
 
     </div>
   );
-  
-
-
 }
 
 
