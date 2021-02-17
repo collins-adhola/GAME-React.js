@@ -1,5 +1,4 @@
 
-
 const Header = (props) => {
  
   return (
@@ -62,6 +61,8 @@ class Counter extends React.Component {
     
   }
 }
+
+
 class App extends React.Component {
   state = {
     players:[
@@ -90,7 +91,7 @@ class App extends React.Component {
   };
 
   handleRemovePlayer =(id) => {
-    this.setState(prevSate => {
+    this.setState(prevState => {
       return {
         players: prevState.players.filter(p => p.id !== id)
       };     
@@ -123,9 +124,6 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
-
-
-
 
 
 
